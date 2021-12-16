@@ -1,25 +1,39 @@
 package main;
 
-import java.io.*;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Address a1 = new Address("1234 Made Up street", "Dover", "Arkansas", 72837);
-        Address a2 = new Address("1234 BB Lane", "Haroldson", "Utah", 12345);
-        Address a3 = new Address("1234 LOTR Road", "Shire", "Middle Earth", 72153);
+//        Address a1 = new Address("1234 MadeUp street", "Dover", "Arkansas", 72837);
+//        Address a2 = new Address("1234 BB Lane", "Haroldson", "Utah", 12345);
+//        Address a3 = new Address("1234 LOTR Road", "Shire", "Middle Earth", 72153);
+//
+//        Person p1 = new Person("Jon", "Thomas", "Tinsley", 1234567890, a1);
+//        Person p2 = new Person("Bill", "W", "Weasley", 1234567890, a2);
+//        Person p3 = new Person("Sam", "Flint", "Gamsy", 1231212348, a3);
+//
+//        Person.write("people.txt", p1, a1);
+//        Person.write("people.txt", p2, a2);
+//        Person.write("people.txt", p3, a3);
 
-        Person p1 = new Person("Jon", "Thomas", "Tinsley", a1, 1234567890);
-        Person p2 = new Person("Bill", "W", "Weasley", a2, 1234567890);
-        Person p3 = new Person("Sam", "Flint", "Gamsy", a3, 1231212348);
-
-//        WriteToFile.write("people.txt", p1);
-//        WriteToFile.write("people.txt", p2);
-//        WriteToFile.write("people.txt", p3);
-//        ReadFromFile.fullFileRead("people.txt");
-        ReadFromFile.searchFile("people.txt", "lo");
-        // Menu.menu();
+//        Person.fullFileRead("people.txt");
+        String firstNameToSearch = "jon";
+        String lastNameToSearch = "gamsy";
+        String firstNameToSearch2 = "bill";
+        String lastNameToSearch2 = "weasley";
+        String theFile = "people.txt";
+        long thePhoneNumber = 1231564874;
+        String theCityState = "shire";
+        System.out.println("Your search for first name'" + firstNameToSearch + "' returned:\n" + (Arrays.toString(Person.searchByFirstName(theFile, firstNameToSearch))) + "\n");
+        System.out.println("Your search for last name'" + lastNameToSearch + "' returned:\n" + Arrays.toString(Person.searchByLastName(theFile, lastNameToSearch)) + "\n");
+        System.out.println("Your search for full name '" + firstNameToSearch2 + " " + lastNameToSearch2 + "' returned:\n" + Arrays.toString(Person.searchByFullName(theFile, firstNameToSearch2, lastNameToSearch2)) + "\n");
+        System.out.println("Your search by phone number'" + thePhoneNumber + "' returned:\n" + Arrays.toString(Person.searchByPhoneNumber(theFile, thePhoneNumber)) + "\n");
+        System.out.println("Your search by city/state '" + theCityState + "' returned:\n" + Arrays.toString(Person.searchByCityState(theFile, theCityState)) + "\n");
+        System.out.println(Arrays.toString(Person.readLineToStringArr(theFile)));
+//        Menu.menu();
     }
 }
 

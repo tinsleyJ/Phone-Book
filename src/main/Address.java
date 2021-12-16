@@ -2,10 +2,10 @@ package main;
 
 public class Address {
 
-    private String street;
-    private String city;
-    private String state;
-    private int zipCode;
+    protected String street;
+    protected String city;
+    protected String state;
+    protected int zipCode;
 
     public Address() {
     }
@@ -51,6 +51,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return street + " " + city + " " + state + " " + zipCode;
+        return street + ", " + city + " " + state + ", " + zipCode;
     }
+
 }
+
