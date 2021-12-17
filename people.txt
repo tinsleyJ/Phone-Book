@@ -1,5 +1,0 @@
-Jon; Thomas; Tinsley; 222 MadeUp street; Dover; Arkansas; 72837; 8433478917
-Bill; W; Weasley; 775 BB Lane; Haroldson; Utah; 12345; 1234567890
-Sam; Flint; Gamsy; 345 LOTR Road; Shire; Middle Earth; 72153; 1231212348
-Jon; Thomas; Tinsley; 1234 flop road; Dover; Arkansas; 72837; 1231564874
-Bill; W; Weasley; 5550 CC Lane; Haroldson; Utah; 12345; 1234567890

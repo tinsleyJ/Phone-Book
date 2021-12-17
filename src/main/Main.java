@@ -1,40 +1,215 @@
 package main;
 
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-//        Address a1 = new Address("1234 MadeUp street", "Dover", "Arkansas", 72837);
-//        Address a2 = new Address("1234 BB Lane", "Haroldson", "Utah", 12345);
-//        Address a3 = new Address("1234 LOTR Road", "Shire", "Middle Earth", 72153);
-//
-//        Person p1 = new Person("Jon", "Thomas", "Tinsley", 1234567890, a1);
-//        Person p2 = new Person("Bill", "W", "Weasley", 1234567890, a2);
-//        Person p3 = new Person("Sam", "Flint", "Gamsy", 1231212348, a3);
-//
-//        Person.write("people.txt", p1, a1);
-//        Person.write("people.txt", p2, a2);
-//        Person.write("people.txt", p3, a3);
+        Methods m = new Methods();
 
-//        Person.fullFileRead("people.txt");
-        String firstNameToSearch = "jon";
-        String lastNameToSearch = "gamsy";
-        String firstNameToSearch2 = "bill";
-        String lastNameToSearch2 = "weasley";
-        String theFile = "people.txt";
-        long thePhoneNumber = 1231564874;
-        String theCityState = "shire";
-        System.out.println("Your search for first name'" + firstNameToSearch + "' returned:\n" + (Arrays.toString(Person.searchByFirstName(theFile, firstNameToSearch))) + "\n");
-        System.out.println("Your search for last name'" + lastNameToSearch + "' returned:\n" + Arrays.toString(Person.searchByLastName(theFile, lastNameToSearch)) + "\n");
-        System.out.println("Your search for full name '" + firstNameToSearch2 + " " + lastNameToSearch2 + "' returned:\n" + Arrays.toString(Person.searchByFullName(theFile, firstNameToSearch2, lastNameToSearch2)) + "\n");
-        System.out.println("Your search by phone number'" + thePhoneNumber + "' returned:\n" + Arrays.toString(Person.searchByPhoneNumber(theFile, thePhoneNumber)) + "\n");
-        System.out.println("Your search by city/state '" + theCityState + "' returned:\n" + Arrays.toString(Person.searchByCityState(theFile, theCityState)) + "\n");
-        System.out.println(Arrays.toString(Person.readLineToStringArr(theFile)));
-//        Menu.menu();
+//        ==================================== Some test Cases ====================================
+        m.createPhoneBookEntry("Jon Thomas Tinsley, 1234 MadeUp street, Dover, AR, 72837, 1234567890");
+        m.createPhoneBookEntry("John Doe, 114 Market St, St Louis, MO, 63403, 6366435698");
+        m.createPhoneBookEntry("John E Doe, 324 Main St, St Charles, MO,63303, 8475390126");
+        m.createPhoneBookEntry("John Michael West Doe, 574 Pole ave, St. Peters, MO, 63333, 5628592375");
+        System.out.println(Arrays.toString(m.searchByFirstName("john")));
+        System.out.println(Arrays.toString(m.searchByLastName("doe")));
+        System.out.println(Arrays.toString(m.searchByFullName("john", "doe")));
+
+        do {
+            Scanner in = new Scanner(System.in);
+            System.out.println("""
+                    ==========================================PHONE BOOK==========================================
+                        1 - Add new entry
+                        2 - Search by name
+                        3 - Search by telephone number
+                        4 - Search by city or state
+                        5 - Delete a record for a given telephone number
+                        6 - Update a record for a given telephone number
+                        7 - Show all records in ascending order
+                        8 - Exit
+                    ==============================================================================================
+                    """);
+            int choice = in.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    Scanner strIn = new Scanner(System.in);
+                    System.out.println("""
+                            ==============================================================================================
+                            Enter the record you would like to add to the phone book:
+                            ==============================================================================================
+                            """);
+                    String recordToAdd = strIn.nextLine();
+                    m.createPhoneBookEntry(recordToAdd);
+                    repeatMenu();
+                }
+                case 2 -> {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("""
+                            ==============================================================================================
+                            1 - Search by first name.
+                            2 - Search by last name.
+                            3 - Search by full name.
+                            4 - Go back.
+                            ==============================================================================================
+                            """);
+                    int searchChoice = sc.nextInt();
+                    switch (searchChoice) {
+                        case 1 -> {
+                            System.out.println("""
+                                    ==============================================================================================
+                                    Enter the first name to search for:
+                                    ==============================================================================================
+                                    """);
+                            String fNameSearch = sc.next();
+                            System.out.println(Arrays.toString(m.searchByFirstName(fNameSearch)));
+                        }
+                        case 2 -> {
+                            System.out.println("""
+                                    ==============================================================================================
+                                    Enter the last name to search for:
+                                    ==============================================================================================
+                                    """);
+                            String lNameSearch = sc.next();
+                            System.out.println(Arrays.toString(m.searchByLastName(lNameSearch)));
+                        }
+                        case 3 -> {
+                            System.out.println("""
+                                    ==============================================================================================
+                                    Enter the first name to search for:
+                                    ==============================================================================================
+                                    """);
+                            String fNameSearch = sc.next();
+                            System.out.println("""
+                                    ==============================================================================================
+                                    Enter the Last Name to search for:
+                                    ==============================================================================================
+                                    """);
+                            String lNameSearch = sc.next();
+                            System.out.println(Arrays.toString(m.searchByFullName(fNameSearch, lNameSearch)));
+                        }
+                        case 4 -> {
+                            return;
+                        }
+                    }
+                    repeatMenu();
+                }
+                case 3 -> {
+                    Scanner strIn = new Scanner(System.in);
+                    System.out.println("""
+                            ==============================================================================================
+                            Enter the number you would like to search by:
+                            ==============================================================================================
+                            """);
+                    long phoneNumberSearch = strIn.nextLong();
+                    m.searchByPhoneNumber(phoneNumberSearch);
+                    repeatMenu();
+                }
+                case 4 -> {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("""
+                            ==============================================================================================
+                            1 - Search by city
+                            2 - Search by state
+                            ==============================================================================================
+                            """);
+                    int locationSearchChoice = sc.nextInt();
+                    switch (locationSearchChoice) {
+                        case 1 -> {
+
+                            System.out.println("""
+                                    ==============================================================================================
+                                    Enter the city name to search for:
+                                    ==============================================================================================
+                                    """);
+                            String citySearch = sc.next();
+                            System.out.println(m.searchByCity(citySearch));
+                            repeatMenu();
+                        }
+                        case 2 -> {
+                            System.out.println("""
+                                    ==============================================================================================
+                                    Enter the state to search for:
+                                    ==============================================================================================
+                                    """);
+                            String stateSearch = sc.next();
+                            System.out.println(m.searchByState(stateSearch));
+                            repeatMenu();
+                        }
+                    }
+                }
+                case 5 -> {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("""
+                            ==============================================================================================
+                            Enter the telephone number of the record you would like to delete:
+                            ==============================================================================================
+                            """);
+                    long phoneNumberDelete = sc.nextLong();
+                    m.deletePerson(phoneNumberDelete);
+                    repeatMenu();
+                }
+                case 6 -> {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("""
+                            ==============================================================================================
+                            Enter the telephone number of the record you would like to update:
+                            ==============================================================================================
+                            """);
+                    long phoneNumberUpdate = sc.nextLong();
+                    m.updatePerson(phoneNumberUpdate);
+                    repeatMenu();
+                }
+                case 7 -> {
+                    // Display all records in Ascending order
+                    m.fullSort();
+                    repeatMenu();
+                }
+                case 8 -> {
+                    System.out.println("Book closed, Have a nice day!");
+                    System.exit(0);
+                }
+            }
+
+        } while (true);
     }
+
+    public static void repeatMenu() {
+        Scanner input = new Scanner(System.in);
+
+        int reRunMenu;
+        do {
+            System.out.println("""
+                    ==============================================================================================
+                    Return to main menu?
+                    1:\t  Yes
+                    2:\t  No
+                    ==============================================================================================""");
+            reRunMenu = input.nextInt();
+            if (reRunMenu < 1 || reRunMenu > 2) {
+                do {
+                    System.out.println("Please enter a valid option.");
+                    System.out.println("""
+                            ==============================================================================================
+                            Return to main menu?
+                            1:\t  Yes
+                            2:\t  No
+                            ==============================================================================================""");
+                    reRunMenu = input.nextInt();
+                } while (reRunMenu < 1 || reRunMenu > 2);
+            } else if (reRunMenu == 1) {
+                break;
+            } else {
+                System.out.println("Book closed, Have a nice day!");
+                System.exit(0);
+            }
+        } while (true);
+
+    }
+
+
 }
 
 //      Write a program to simulate the actions of a phonebook. (s)
@@ -57,9 +232,9 @@ public class Main {
 //         Your program should have a minimum of 2 classes a Person class, an Address  class.
 //
 //         Test case :
-//         John Doe, 114 Market St, St Louis, MO, 63403, 6366435698
-//         John E Doe, 324 Main St, St Charles, MO,63303, 8475390126
-//         John Michael West Doe, 574 Pole ave, St. Peters, MO, 63333, 5628592375
+//         "John Doe, 114 Market St, St Louis, MO, 63403, 6366435698"
+//         "John E Doe, 324 Main St, St Charles, MO,63303, 8475390126"
+//         "John Michael West Doe, 574 Pole ave, St. Peters, MO, 63333, 5628592375"
 //         Note: Test cases should work when copy and paste into the console as one entry (as is).
 //         ONLY ARRAYS ARE ALLOWED, NO ARRAYLIST.
 //

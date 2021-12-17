@@ -2,10 +2,10 @@ package main;
 
 public class Address {
 
-    protected String street;
-    protected String city;
-    protected String state;
-    protected int zipCode;
+    private String street;
+    private String city;
+    private String state;
+    private int zipCode;
 
     public Address() {
     }
